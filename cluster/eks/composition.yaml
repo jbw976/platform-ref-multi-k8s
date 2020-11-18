@@ -174,7 +174,6 @@ spec:
           credentials:
             source: Secret
             secretRef:
-              namespace: crossplane-system
               key: kubeconfig
       patches:
         - fromFieldPath: spec.id
@@ -187,5 +186,7 @@ spec:
             - type: string
               string:
                 fmt: "%s-ekscluster"
+        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
+          toFieldPath: spec.credentials.secretRef.namespace
       readinessChecks:
         - type: None
